@@ -3,6 +3,8 @@ export interface Rating {
   count: number;
 }
 
+export type SortOrder = "asc" | "desc";
+
 export interface Product {
   id: number;
   title: string;
