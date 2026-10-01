@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
 export default function ProductError({ reset }: { reset: () => void }) {
@@ -13,9 +14,9 @@ export default function ProductError({ reset }: { reset: () => void }) {
           <Button variant="primary" onClick={() => reset()}>
             Retry
           </Button>
-          <a href="/products">
+          <Link href="/products">
             <Button variant="secondary">Browse products</Button>
-          </a>
+          </Link>
         </div>
       </div>
     </main>

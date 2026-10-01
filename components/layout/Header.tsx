@@ -9,6 +9,7 @@ import { useAuthStore } from "@/store/authStore";
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const userName = useAuthStore((state) => state.userName);
   const logout = useAuthStore((state) => state.logout);
 
   return (
@@ -26,9 +27,12 @@ export function Header() {
             Cart
           </Link>
           {isAuthenticated ? (
-            <Button variant="secondary" size="sm" onClick={logout}>
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              {userName ? <span className="text-sm font-medium text-gray-700">Hi, {userName.firstname}</span> : null}
+              <Button variant="secondary" size="sm" onClick={logout}>
+                Logout
+              </Button>
+            </div>
           ) : (
             <Link href="/login">
               <Button variant="secondary" size="sm">
@@ -62,9 +66,12 @@ export function Header() {
               Cart
             </Link>
             {isAuthenticated ? (
-              <button type="button" onClick={logout} className="rounded-md px-2 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100">
-                Logout
-              </button>
+              <div className="flex items-center justify-between gap-3 px-2 py-2">
+                {userName ? <span className="text-sm font-medium text-gray-700">Hi, {userName.firstname}</span> : null}
+                <button type="button" onClick={logout} className="rounded-md px-2 py-1 text-left text-sm font-medium text-gray-700 hover:bg-gray-100">
+                  Logout
+                </button>
+              </div>
             ) : (
               <Link href="/login" className="rounded-md px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
                 Login
