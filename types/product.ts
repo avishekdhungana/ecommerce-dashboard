@@ -14,3 +14,10 @@ export interface Product {
   image: string;
   rating: Rating;
 }
+
+export interface ProductFilters {
+  search: string;
+  category: string; // "" means all categories
+  minPrice: number | null;
+  maxPrice: number | null;
+}

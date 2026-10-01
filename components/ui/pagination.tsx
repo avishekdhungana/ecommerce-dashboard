@@ -1,49 +1,49 @@
-import Link from "next/link";
+"use client";
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  createHref: (page: number) => string;
+  onPageChange: (page: number) => void;
 }
 
-export function Pagination({
-  currentPage,
-  totalPages,
-  createHref,
-}: PaginationProps) {
+export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  const linkClass = "rounded-md border px-3 py-2 text-sm";
+  const base = "rounded-md border px-3 py-2 text-sm disabled:opacity-50";
 
   return (
     <nav aria-label="Pagination" className="mt-8 flex items-center justify-center gap-2">
-      {currentPage > 1 && (
-        <Link href={createHref(currentPage - 1)} className={`${linkClass} border-gray-300 bg-white`}>
-          Previous
-        </Link>
-      )}
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className={`${base} border-gray-300 bg-white`}
+      >
+        Previous
+      </button>
 
       {pages.map((page) => (
-        <Link
+        <button
           key={page}
-          href={createHref(page)}
+          onClick={() => onPageChange(page)}
           aria-current={page === currentPage ? "page" : undefined}
-          className={`${linkClass} ${
+          className={`${base} ${
             page === currentPage
               ? "border-blue-600 bg-blue-600 text-white"
               : "border-gray-300 bg-white"
           }`}
         >
           {page}
-        </Link>
+        </button>
       ))}
 
-      {currentPage < totalPages && (
-        <Link href={createHref(currentPage + 1)} className={`${linkClass} border-gray-300 bg-white`}>
-          Next
-        </Link>
-      )}
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className={`${base} border-gray-300 bg-white`}
+      >
+        Next
+      </button>
     </nav>
   );
 }

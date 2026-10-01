@@ -1,41 +1,23 @@
-import { getProducts } from "@/lib/api/product";
-import { ProductGrid } from "@/components/products/ProductGrid";
-import { Pagination } from "@/components/ui/pagination";
+import { getProducts, getCategories } from "@/lib/api/product";
+import { ProductsView } from "@/components/product/ProductsView";
 import { SortSelect } from "@/components/ui/SortSelect";
-import { PRODUCTS_PER_PAGE } from "@/lib/api/constants";
-import { paginate } from "@/lib/api/pagination";
 import type { SortOrder } from "@/types/product";
 
 interface ProductsPageProps {
-  searchParams: Promise<{ sort?: string; page?: string }>;
+  searchParams: Promise<{ sort?: string }>;
 }
 
 function parseSort(value?: string): SortOrder | undefined {
   return value === "asc" || value === "desc" ? value : undefined;
 }
 
-function parsePage(value?: string): number {
-  const page = Number(value);
-  return Number.isInteger(page) && page > 0 ? page : 1;
-}
-
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const { sort, page } = await searchParams;
-  const parsedSort = parseSort(sort);
+  const { sort } = await searchParams;
 
-  const products = await getProducts(parsedSort);
-  const { items, currentPage, totalPages } = paginate(
-    products,
-    parsePage(page),
-    PRODUCTS_PER_PAGE
-  );
-
-  function createHref(targetPage: number): string {
-    const params = new URLSearchParams();
-    if (parsedSort) params.set("sort", parsedSort);
-    params.set("page", String(targetPage));
-    return `/products?${params.toString()}`;
-  }
+  const [products, categories] = await Promise.all([
+    getProducts(parseSort(sort)),
+    getCategories(),
+  ]);
 
   return (
     <main className="min-h-screen bg-gray-50 px-6 py-10">
@@ -44,12 +26,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           <h1 className="text-2xl font-bold text-gray-900">Products</h1>
           <SortSelect />
         </div>
-        <ProductGrid products={items} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          createHref={createHref}
-        />
+        <ProductsView products={products} categories={categories} />
       </div>
     </main>
   );
