@@ -9,6 +9,10 @@ interface CategoryFilterProps {
 }
 
 export function CategoryFilter({ categories, value, onChange }: CategoryFilterProps) {
+  const uniqueCategories = Array.from(new Set(categories)).sort((left, right) =>
+    left.localeCompare(right)
+  );
+
   return (
     <Select
       value={value}
@@ -16,8 +20,8 @@ export function CategoryFilter({ categories, value, onChange }: CategoryFilterPr
       aria-label="Filter by category"
       className="capitalize"
     >
-      <option value="">All categories</option>
-      {categories.map((category) => (
+      <option value="">All</option>
+      {uniqueCategories.map((category) => (
         <option key={category} value={category}>
           {category}
         </option>

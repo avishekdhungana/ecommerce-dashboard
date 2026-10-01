@@ -15,6 +15,7 @@ export function SearchFilter({ value, onChange }: SearchFilterProps) {
       onChange={(e) => onChange(e.target.value)}
       placeholder="Search products..."
       aria-label="Search products"
+      className="sm:max-w-xs"
     />
   );
 }
