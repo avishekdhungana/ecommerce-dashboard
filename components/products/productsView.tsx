@@ -1,14 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ProductGrid } from "@/components/product/ProductGrid";
+import { ProductGrid } from "@/components/products/ProductGrid";
 import { SearchFilter } from "@/components/filters/SearchFilter";
 import { CategoryFilter } from "@/components/filters/CategoryFilter";
 import { PriceRangeFilter } from "@/components/filters/PriceRangeFilter";
-import { Pagination } from "@/components/ui/Pagination";
-import { PRODUCTS_PER_PAGE } from "@/lib/constants";
-import { filterProducts } from "@/lib/utils/filterProducts";
-import { paginate } from "@/lib/utils/pagination";
+import { Pagination } from "@/components/ui/pagination";
+import { PRODUCTS_PER_PAGE } from "@/lib/api/constants";
+import { filterProducts } from "@/lib/api/filterProducts";
+import { paginate } from "@/lib/api/pagination";
 import type { Product, ProductFilters } from "@/types/product";
 
 interface ProductsViewProps {

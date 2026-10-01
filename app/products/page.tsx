@@ -1,5 +1,5 @@
 import { getProducts, getCategories } from "@/lib/api/product";
-import { ProductsView } from "@/components/product/ProductsView";
+import { ProductsView } from "@/components/products/productsView";
 import { SortSelect } from "@/components/ui/SortSelect";
 import type { SortOrder } from "@/types/product";
 
