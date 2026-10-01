@@ -6,6 +6,7 @@ import { ApiError } from "@/lib/api/error";
 import { Rating } from "@/components/ui/Rating";
 import { formatPrice } from "@/lib/utils/format";
 import type { Product } from "@/types/product";
+import { AddToCart } from "@/components/products/AddToCart";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
@@ -55,7 +56,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-4 text-sm leading-6 text-gray-600">
               {product.description}
             </p>
-            {/* AddToCart goes here later */}
+          <AddToCart product={product} />
           </div>
         </div>
       </div>
