@@ -22,10 +22,14 @@ function parseSort(value?: string): SortOrder | undefined {
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const { sort } = await searchParams;
 
-  const [products, categories] = await Promise.all([
-    getProducts(parseSort(sort)),
-    getCategories(),
-  ]);
+  const products = await getProducts(parseSort(sort));
+  let categories: string[];
+
+  try {
+    categories = await getCategories();
+  } catch {
+    categories = Array.from(new Set(products.map((product) => product.category)));
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-8">

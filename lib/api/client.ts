@@ -10,8 +10,9 @@ export async function request<T>(
   try {
     response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
+      cache: "no-store",
       headers: {
-        "Content-Type": "application/json",
+        ...(options?.body ? { "Content-Type": "application/json" } : {}),
         ...options?.headers,
       },
     });
