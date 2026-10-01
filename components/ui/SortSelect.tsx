@@ -10,18 +10,21 @@ export function SortSelect() {
 
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", event.target.value);
+    if (event.target.value === "all") params.delete("sort");
+    else params.set("sort", event.target.value);
     params.delete("page");
-    router.push(`${pathname}?${params.toString()}`);
+    const query = params.toString();
+    router.push(query ? `${pathname}?${query}` : pathname);
   }
 
   return (
     <Select
-      value={searchParams.get("sort") ?? "asc"}
+      value={searchParams.get("sort") ?? "all"}
       onChange={handleChange}
       aria-label="Sort products"
       className="min-w-[150px]"
     >
+      <option value="all">All products</option>
       <option value="asc">Oldest first</option>
       <option value="desc">Newest first</option>
     </Select>
