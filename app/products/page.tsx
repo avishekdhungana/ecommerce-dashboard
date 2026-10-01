@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import { getProducts, getCategories } from "@/lib/api/product";
 import { ProductsView } from "@/components/products/productsView";
 import { SortSelect } from "@/components/ui/SortSelect";
+import { ProductGridSkeleton } from "@/components/product/ProductGridSkeleton";
 import type { SortOrder } from "@/types/product";
 
 interface ProductsPageProps {
@@ -26,7 +28,9 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           <h1 className="text-2xl font-bold text-gray-900">Products</h1>
           <SortSelect />
         </div>
-        <ProductsView products={products} categories={categories} />
+        <Suspense fallback={<ProductGridSkeleton />}>
+          <ProductsView products={products} categories={categories} />
+        </Suspense>
       </div>
     </main>
   );
