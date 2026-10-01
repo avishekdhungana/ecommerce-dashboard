@@ -16,8 +16,8 @@ export function CartItemRow({ item, onQuantityChange, onRemove }: CartItemRowPro
   const { product, quantity } = item;
 
   return (
-    <li className="flex gap-4 py-4">
-      <div className="relative h-24 w-24 shrink-0">
+    <li className="flex flex-col gap-4 py-4 sm:flex-row">
+      <div className="relative h-24 w-24 shrink-0 self-center sm:self-start">
         <Image src={product.image} alt={product.title} fill sizes="96px" className="object-contain" />
       </div>
 
@@ -41,7 +41,7 @@ export function CartItemRow({ item, onQuantityChange, onRemove }: CartItemRowPro
         </div>
       </div>
 
-      <p className="text-sm font-semibold text-gray-900">
+      <p className="text-sm font-semibold text-gray-900 sm:pt-1">
         {formatPrice(product.price * quantity)}
       </p>
     </li>

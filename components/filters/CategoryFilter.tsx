@@ -1,5 +1,7 @@
 "use client";
 
+import { Select } from "@/components/ui/Select";
+
 interface CategoryFilterProps {
   categories: string[];
   value: string;
@@ -8,11 +10,11 @@ interface CategoryFilterProps {
 
 export function CategoryFilter({ categories, value, onChange }: CategoryFilterProps) {
   return (
-    <select
+    <Select
       value={value}
       onChange={(e) => onChange(e.target.value)}
       aria-label="Filter by category"
-      className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm capitalize"
+      className="capitalize"
     >
       <option value="">All categories</option>
       {categories.map((category) => (
@@ -20,6 +22,6 @@ export function CategoryFilter({ categories, value, onChange }: CategoryFilterPr
           {category}
         </option>
       ))}
-    </select>
+    </Select>
   );
 }

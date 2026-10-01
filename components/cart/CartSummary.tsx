@@ -8,7 +8,7 @@ interface CartSummaryProps {
 
 export function CartSummary({ total, itemCount, onClear }: CartSummaryProps) {
   return (
-    <aside className="h-fit rounded-lg border border-gray-200 bg-white p-6">
+    <aside className="h-fit rounded-lg border border-gray-200 bg-white p-6 shadow-sm lg:sticky lg:top-24">
       <h2 className="text-lg font-semibold text-gray-900">Order summary</h2>
       <dl className="mt-4 space-y-2 text-sm">
         <div className="flex justify-between">

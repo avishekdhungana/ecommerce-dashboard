@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Select } from "@/components/ui/Select";
 
 export function SortSelect() {
   const router = useRouter();
@@ -10,18 +11,19 @@ export function SortSelect() {
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", event.target.value);
+    params.delete("page");
     router.push(`${pathname}?${params.toString()}`);
   }
 
   return (
-    <select
+    <Select
       value={searchParams.get("sort") ?? "asc"}
       onChange={handleChange}
-      className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm"
       aria-label="Sort products"
+      className="min-w-[150px]"
     >
       <option value="asc">Oldest first</option>
       <option value="desc">Newest first</option>
-    </select>
+    </Select>
   );
 }

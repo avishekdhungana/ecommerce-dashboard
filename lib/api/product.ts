@@ -1,4 +1,4 @@
-import { request } from "./cilent";
+import { request } from "@/lib/api/client";
 import type { Product, SortOrder } from "@/types/product";
 
 export function getProducts(sort?: SortOrder): Promise<Product[]> {

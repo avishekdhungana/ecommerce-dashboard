@@ -28,8 +28,8 @@ export function CartView() {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
-      <ul className="divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white px-4">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <ul className="divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white px-4 shadow-sm">
         {items.map((item) => (
           <CartItemRow
             key={item.product.id}
